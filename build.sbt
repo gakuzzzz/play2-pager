@@ -17,7 +17,7 @@ lazy val core = (project in file("core")).
     version := _version,
     crossScalaVersions := _crossScalaVersions,
     libraryDependencies ++= Seq(
-      "com.typesafe.play"  %%   "play"   %  "2.3.0"
+      "com.typesafe.play"  %%   "play"   %  "2.3.4"
     )
   )
 
@@ -44,7 +44,7 @@ lazy val sample = (project in file("sample")).
     play.PlayImport.PlayKeys.routesImport ++= Seq(
       "jp.t2v.lab.play2.pager.Bindables._"
     ),
-    TwirlKeys.templateImport ++ Seq(
+    TwirlKeys.templateImports ++= Seq(
       "jp.t2v.lab.play2.pager._"
     )
   )
