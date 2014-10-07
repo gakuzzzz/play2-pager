@@ -12,8 +12,8 @@ object Account extends SQLSyntaxSupport[Account] {
   def apply(s: SyntaxProvider[Account])(rs: WrappedResultSet): Account = autoConstruct(rs, s)
 
   implicit object sortable extends Sortable[Account] {
-    override def default: (String, OrderType) = ("id", OrderType.Descending)
-    override def acceptableKeys: Set[String] = Set("id", "name", "email", "birthday", "createdAt")
+    def default: (String, OrderType) = ("id", OrderType.Descending)
+    def acceptableKeys: Set[String] = Set("id", "name", "email", "birthday", "createdAt")
   }
 
 }
