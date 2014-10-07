@@ -18,8 +18,8 @@ object Bindables {
         case _            => (ev.defaultSorter, Nil)
       }
       Some(Right(Pager[A](
-        page = bindableInt.bind("page", params).flatMap(_.right.toOption).getOrElse(1),
-        size = bindableInt.bind("size", params).flatMap(_.right.toOption).getOrElse(ev.defaultPageSize) min ev.maxPageSize,
+        page = bindableInt.bind("page", params).flatMap(_.right.toOption).getOrElse(1) max 1,
+        size = bindableInt.bind("size", params).flatMap(_.right.toOption).getOrElse(ev.defaultPageSize) min ev.maxPageSize max 1,
         primarySorter = primary,
         optional: _*
       )))

@@ -2,10 +2,6 @@ package jp.t2v.lab.play2.pager
 
 import annotation.implicitNotFound
 
-case class Sorter[A] private[pager] (key: String, dir: OrderType) {
-  def reverse: Sorter[A] = Sorter[A](key, dir.reverse)
-}
-
 @implicitNotFound("Sortable[${A}] could not be found.")
 trait Sortable[A] {
 

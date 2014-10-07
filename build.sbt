@@ -22,6 +22,7 @@ lazy val core = (project in file("core")).
   )
 
 lazy val scalikejdbc = (project in file("scalikejdbc")).
+  dependsOn(core).
   settings(
     organization := _org,
     name := "play2-pager-scalikejdbc",
@@ -38,13 +39,19 @@ lazy val sample = (project in file("sample")).
   settings(
     crossScalaVersions := _crossScalaVersions,
     libraryDependencies ++= Seq(
-      "com.h2database"  %  "h2"                 % "1.4.+",
-      "ch.qos.logback"  %  "logback-classic"    % "1.1.+"
+      "com.h2database"       %  "h2"                                  % "1.4.+",
+      "ch.qos.logback"       %  "logback-classic"                     % "1.1.+",
+      "org.scalikejdbc"      %% "scalikejdbc-play-plugin"             % "2.3.0",
+      "org.scalikejdbc"      %% "scalikejdbc-syntax-support-macro"    % "2.1.+",
+      "com.github.tototoshi" %% "play-flyway"                         % "1.1.0"
     ),
     play.PlayImport.PlayKeys.routesImport ++= Seq(
-      "jp.t2v.lab.play2.pager.Bindables._"
+      "jp.t2v.lab.play2.pager.Pager",
+      "jp.t2v.lab.play2.pager.Bindables._",
+      "models.account._"
     ),
     TwirlKeys.templateImports ++= Seq(
-      "jp.t2v.lab.play2.pager._"
+      "jp.t2v.lab.play2.pager._",
+      "models.account._"
     )
   )

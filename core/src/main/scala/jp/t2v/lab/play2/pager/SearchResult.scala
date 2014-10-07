@@ -11,8 +11,10 @@ case class SearchResult[A](pager: Pager[A], items: Seq[A], totalCount: Long) {
   lazy val hasPrevious: Boolean = pager.page > minPage
   lazy val hasNext: Boolean = pager.page < maxPage
 
-  lazy val previousPager: Option[Pager[A]] = if (hasPrevious) Some(move(pager.page - 1)) else None
-  lazy val nextPager: Option[Pager[A]] = if (hasNext) Some(move(pager.page + 1)) else None
+  lazy val firstPager: Pager[A] = move(minPage)
+  lazy val previousPager: Pager[A] = move(pager.page - 1)
+  lazy val nextPager: Pager[A] = move(pager.page + 1)
+  lazy val lastPager: Pager[A] = move(maxPage)
 
   def window(size: Int): Seq[Int] = ((pager.page - size) max minPage) to ((pager.page + size) min maxPage)
   def pagerWindow(size: Int): Seq[Pager[A]] = window(size).map(move)

@@ -1,12 +1,16 @@
 package controllers
 
-import play.api._
 import play.api.mvc._
+import models.ComponentRegistry
+import jp.t2v.lab.play2.pager.Pager
+import models.account.Account
 
-object Application extends Controller {
+trait Application extends Controller with ComponentRegistry {
 
-  def index = Action {
-    Ok(views.html.index("Your new application is ready."))
+  def index(pager: Pager[Account]) = Action {
+    Ok(views.html.index(accountService.findAll(pager)))
   }
 
 }
+
+object Application extends Application

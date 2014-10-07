@@ -1,7 +1,58 @@
-@(message: String)
+@(result: SearchResult[Account])
 
-@main("Welcome to Play") {
+@main("Welcome to Play2 Pager") {
 
-    @play20.welcome(message)
+    <table class="table">
+      <thead>
+        <tr>
+          <th><a href="@routes.Application.index(result.keyPager("id"))">id</a> @{if(result.pager.primarySorter.key == "id") result.pager.primarySorter.dir.value}</th>
+          <th><a href="@routes.Application.index(result.keyPager("name"))">name</a> @{if(result.pager.primarySorter.key == "name") result.pager.primarySorter.dir.value}</th>
+          <th><a href="@routes.Application.index(result.keyPager("email"))">email</a> @{if(result.pager.primarySorter.key == "email") result.pager.primarySorter.dir.value}</th>
+          <th><a href="@routes.Application.index(result.keyPager("birthday"))">birthday</a> @{if(result.pager.primarySorter.key == "birthday") result.pager.primarySorter.dir.value}</th>
+          <th><a href="@routes.Application.index(result.keyPager("createdAt"))">createdAt</a> @{if(result.pager.primarySorter.key == "createdAt") result.pager.primarySorter.dir.value}</th>
+        </tr>
+      </thead>
+      <tbody>
+        @result.items.map { account =>
+          <tr>
+              <th>@{account.id}</th>
+              <td>@{account.name}</td>
+              <td>@{account.email}</td>
+              <td>@{account.birthday.toString("yyyy/MM/dd")}</td>
+              <td>@{account.createdAt.toString("yyyy-MM-dd HH:mm:ss")}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+
+  <ul class="pagination">
+    @if(result.hasPrevious) {
+      <li><a href="@routes.Application.index(result.firstPager)">&laquo;</a></li>
+      <li><a href="@routes.Application.index(result.previousPager)">&lsaquo;</a></li>
+    } else {
+      <li class="disabled"><a href="#">&laquo;</a></li>
+      <li class="disabled"><a href="#">&lsaquo;</a></li>
+    }
+    @if(result.minPage < result.pager.page - 4) {
+      <li class="disabled"><a href="#">...</a></li>
+    }
+    @result.pagerWindow(4).map { p =>
+      @if(p.page == result.pager.page) {
+        <li class="active"><a href="#">@{p.page} <span class="sr-only">(current)</span></a></li>
+      } else {
+        <li ><a href="@routes.Application.index(p)">@{p.page}</a></li>
+      }
+    }
+    @if(result.maxPage > result.pager.page + 4) {
+      <li class="disabled"><a href="#">...</a></li>
+    }
+    @if(result.hasNext) {
+      <li><a href="@routes.Application.index(result.nextPager)">&rsaquo;</a></li>
+      <li><a href="@routes.Application.index(result.lastPager)">&raquo;</a></li>
+    } else {
+      <li class="disabled"><a href="#">&rsaquo;</a></li>
+      <li class="disabled"><a href="#">&raquo;</a></li>
+    }
+  </ul>
 
 }
