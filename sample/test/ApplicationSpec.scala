@@ -24,7 +24,17 @@ class ApplicationSpec extends Specification {
 
       status(home) must equalTo(OK)
       contentType(home) must beSome.which(_ == "text/html")
-      contentAsString(home) must contain ("Your new application is ready.")
+      contentAsString(home) must contain ("lobortis.tellus@temporarcu.com")
+      contentAsString(home) must contain ("pellentesque.tellus@atvelit.com")
     }
+
+    "render the index page with page parameter" in new WithApplication{
+      val home = route(FakeRequest(GET, "/?page=7&size=30&key=email&dir=asc")).get
+
+      status(home) must equalTo(OK)
+      contentType(home) must beSome.which(_ == "text/html")
+      contentAsString(home) must contain ("dictum.ultricies.ligula@consequatenim.org")
+    }
+
   }
 }

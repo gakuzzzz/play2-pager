@@ -43,11 +43,12 @@ lazy val sample = (project in file("sample")).
   settings(
     crossScalaVersions := _crossScalaVersions,
     libraryDependencies ++= Seq(
-      "com.h2database"       %  "h2"                                  % "1.4.+",
-      "ch.qos.logback"       %  "logback-classic"                     % "1.1.+",
-      "org.scalikejdbc"      %% "scalikejdbc-play-plugin"             % "2.3.0",
-      "org.scalikejdbc"      %% "scalikejdbc-syntax-support-macro"    % "2.1.+",
-      "com.github.tototoshi" %% "play-flyway"                         % "1.1.0"
+      "com.h2database"           %  "h2"                                  % "1.4.+",
+      "ch.qos.logback"           %  "logback-classic"                     % "1.1.+",
+      "org.scalikejdbc"          %% "scalikejdbc-play-plugin"             % "2.3.0",
+      "org.scalikejdbc"          %% "scalikejdbc-syntax-support-macro"    % "2.1.+",
+      "com.github.tototoshi"     %% "play-flyway"                         % "1.1.0",
+      "net.sourceforge.htmlunit" %  "htmlunit"                            % "2.14"     % "test"
     ),
     play.PlayImport.PlayKeys.routesImport ++= Seq(
       "jp.t2v.lab.play2.pager.Pager",
