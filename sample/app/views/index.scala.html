@@ -26,18 +26,18 @@
     </table>
 
     <div>
-      <pre><code>@@pagenation(result, routes.Application.index)</code></pre>
-      @pagenation(result, routes.Application.index)
+      <pre><code>@@pagination(result, routes.Application.index)</code></pre>
+      @pagination(result, routes.Application.index)
     </div>
     <div>
-      <pre><code>@@pagenation(result, routes.Application.index, window = 2,
+      <pre><code>@@pagination(result, routes.Application.index, window = 2,
     firstLabel = Html("First"), previousLabel = Html("Prev"), truncateLabel = Html("..snip.."), nextLabel = Html("Next"), lastLabel = Html("Last"))</code></pre>
-      @pagenation(result, routes.Application.index, window = 2,
+      @pagination(result, routes.Application.index, window = 2,
         firstLabel = Html("First"), previousLabel = Html("Prev"), truncateLabel = Html("..snip.."), nextLabel = Html("Next"), lastLabel = Html("Last"))
     </div>
     <div>
-      <pre><code>@@pagenation(result, routes.Application.index, window = 7, showTruncate = false)</code></pre>
-      @pagenation(result, routes.Application.index, window = 7, showTruncate = false)
+      <pre><code>@@pagination(result, routes.Application.index, window = 7, showTruncate = false)</code></pre>
+      @pagination(result, routes.Application.index, window = 7, showTruncate = false)
     </div>
 
 }

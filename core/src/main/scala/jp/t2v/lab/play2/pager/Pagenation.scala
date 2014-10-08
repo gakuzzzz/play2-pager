@@ -3,7 +3,7 @@ package jp.t2v.lab.play2.pager
 import play.api.mvc.Call
 import play.twirl.api.Html
 
-object pagenation {
+object pagination {
 
   def apply[A](result: SearchResult[A],
                linkTo: Pager[A] => Call,
@@ -23,7 +23,7 @@ object pagenation {
     )
     val previousTruncate = showTruncate && result.minPage < result.pager.page - window
     val nextTruncate = showTruncate && result.maxPage > result.pager.page + window
-    html.pagenation(result, calls, previousTruncate, nextTruncate, firstLabel, previousLabel, truncateLabel, nextLabel, lastLabel)
+    html.pagination(result, calls, previousTruncate, nextTruncate, firstLabel, previousLabel, truncateLabel, nextLabel, lastLabel)
   }
 
 }
