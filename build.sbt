@@ -60,6 +60,7 @@ lazy val core = (project in file("core")).
     name := "play2-pager",
     version := _version,
     crossScalaVersions := _crossScalaVersions,
+    resolvers += "Typesafe repository" at "http://repo.typesafe.com/typesafe/releases/",
     libraryDependencies ++= Seq(
       "com.typesafe.play"  %%   "play"   %  "2.3.4"
     ),
