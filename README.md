@@ -1,4 +1,4 @@
-Play2-Pager
+Play2-Pager [![Build Status](https://travis-ci.org/gakuzzzz/play2-pager.svg)](https://travis-ci.org/gakuzzzz/play2-pager)
 =================================
 
 Pager support for Play2 application.
