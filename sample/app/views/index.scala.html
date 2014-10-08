@@ -25,34 +25,19 @@
       </tbody>
     </table>
 
-  <ul class="pagination">
-    @if(result.hasPrevious) {
-      <li><a href="@routes.Application.index(result.firstPager)">&laquo;</a></li>
-      <li><a href="@routes.Application.index(result.previousPager)">&lsaquo;</a></li>
-    } else {
-      <li class="disabled"><a href="#">&laquo;</a></li>
-      <li class="disabled"><a href="#">&lsaquo;</a></li>
-    }
-    @if(result.minPage < result.pager.page - 4) {
-      <li class="disabled"><a href="#">...</a></li>
-    }
-    @result.pagerWindow(4).map { p =>
-      @if(p.page == result.pager.page) {
-        <li class="active"><a href="#">@{p.page} <span class="sr-only">(current)</span></a></li>
-      } else {
-        <li ><a href="@routes.Application.index(p)">@{p.page}</a></li>
-      }
-    }
-    @if(result.maxPage > result.pager.page + 4) {
-      <li class="disabled"><a href="#">...</a></li>
-    }
-    @if(result.hasNext) {
-      <li><a href="@routes.Application.index(result.nextPager)">&rsaquo;</a></li>
-      <li><a href="@routes.Application.index(result.lastPager)">&raquo;</a></li>
-    } else {
-      <li class="disabled"><a href="#">&rsaquo;</a></li>
-      <li class="disabled"><a href="#">&raquo;</a></li>
-    }
-  </ul>
+    <div>
+      <pre><code>@@pagenation(result, routes.Application.index)</code></pre>
+      @pagenation(result, routes.Application.index)
+    </div>
+    <div>
+      <pre><code>@@pagenation(result, routes.Application.index, window = 2,
+    firstLabel = Html("First"), previousLabel = Html("Previous"), truncateLabel = Html("..snip.."), nextLabel = Html("Next"), lastLabel = Html("Last"))</code></pre>
+      @pagenation(result, routes.Application.index, window = 2,
+        firstLabel = Html("First"), previousLabel = Html("Prev"), truncateLabel = Html("..snip.."), nextLabel = Html("Next"), lastLabel = Html("Last"))
+    </div>
+    <div>
+      <pre><code>@@pagenation(result, routes.Application.index, window = 7, showTruncate = false)</code></pre>
+      @pagenation(result, routes.Application.index, window = 7, showTruncate = false)
+    </div>
 
 }

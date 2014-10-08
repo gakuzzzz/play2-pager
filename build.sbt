@@ -11,6 +11,7 @@ lazy val root = (project in file(".")).
   )
 
 lazy val core = (project in file("core")).
+  enablePlugins(SbtTwirl).
   settings(
     organization := _org,
     name := "play2-pager",
@@ -18,6 +19,9 @@ lazy val core = (project in file("core")).
     crossScalaVersions := _crossScalaVersions,
     libraryDependencies ++= Seq(
       "com.typesafe.play"  %%   "play"   %  "2.3.4"
+    ),
+    TwirlKeys.templateImports ++= Seq(
+      "jp.t2v.lab.play2.pager._"
     )
   )
 

@@ -1,0 +1,32 @@
+@(result: SearchResult[_], calls: Calls, previousTruncate: Boolean, nextTruncate: Boolean, firstLabel: Html, previousLabel: Html, truncateLabel: Html, nextLabel: Html, lastLabel: Html)
+
+<ul class="pagination">
+  @calls.previous.map { previous =>
+    <li><a href="@calls.first">@firstLabel</a></li>
+    <li><a href="@previous">@previousLabel</a></li>
+  }.getOrElse {
+    <li class="disabled"><a href="#">@firstLabel</a></li>
+    <li class="disabled"><a href="#">@previousLabel</a></li>
+  }
+  @if(previousTruncate) {
+    <li class="disabled"><a href="#">@truncateLabel</a></li>
+  }
+  @calls.window.map { case (page, call) =>
+    @if(page == result.pager.page) {
+      <li class="active"><a href="#">@{page} <span class="sr-only">(current)</span></a></li>
+    } else {
+      <li ><a href="@call">@{page}</a></li>
+    }
+  }
+  @if(nextTruncate) {
+    <li class="disabled"><a href="#">@truncateLabel</a></li>
+  }
+  @calls.next.map { next =>
+    <li><a href="@next">@nextLabel</a></li>
+    <li><a href="@calls.last">@lastLabel</a></li>
+  }.getOrElse {
+    <li class="disabled"><a href="#">@nextLabel</a></li>
+    <li class="disabled"><a href="#">@lastLabel</a></li>
+  }
+</ul>
+
