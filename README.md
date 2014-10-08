@@ -103,3 +103,7 @@ class AccountService(implicit accountDao: AccountDao) {
 1. Click `Apply this script now!`
 
 
+## License
+
+This library is released under the Apache Software License, version 2,
+which should be included with the source in a file named `LICENSE`.
