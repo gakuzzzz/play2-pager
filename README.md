@@ -3,6 +3,10 @@ Play2-Pager [![Build Status](https://travis-ci.org/gakuzzzz/play2-pager.svg)](ht
 
 Pager support for Play2 application.
 
+![sample app screenshot](doc/img/play2-pager-sample-ss.png?raw=true)
+
+
+
 ## Setup
 
     resolvers += "Sonatype OSS Snapshots" at "https://oss.sonatype.org/content/repositories/snapshots"
@@ -87,10 +91,6 @@ class AccountService(implicit accountDao: AccountDao) {
 
 }
     ```
-
-    samples
-
-    ![sample app screenshot](doc/img/play2-pager-sample-ss.png?raw=true)
 
     More details, see [Sample App](sample)
 
