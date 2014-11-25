@@ -62,7 +62,7 @@ lazy val core = (project in file("core")).
     crossScalaVersions := _crossScalaVersions,
     resolvers += "Typesafe repository" at "http://repo.typesafe.com/typesafe/releases/",
     libraryDependencies ++= Seq(
-      "com.typesafe.play"  %%   "play"   %  "2.3.4"
+      "com.typesafe.play"  %%   "play"   %  "2.3.4"  %   "provided"
     ),
     TwirlKeys.templateImports ++= Seq(
       "jp.t2v.lab.play2.pager._"
@@ -82,7 +82,7 @@ lazy val scalikejdbc = (project in file("scalikejdbc")).
     version := _version,
     crossScalaVersions := _crossScalaVersions,
     libraryDependencies ++= Seq(
-      "org.scalikejdbc"  %% "scalikejdbc"  % "2.1.+"
+      "org.scalikejdbc"  %% "scalikejdbc"  % "2.2.+"  % "provided"
     ),
     publishMavenStyle       := _publishMavenStyle,
     publishArtifact in Test := _publishArtifactInTest,
@@ -99,8 +99,9 @@ lazy val sample = (project in file("sample")).
     libraryDependencies ++= Seq(
       "com.h2database"           %  "h2"                                  % "1.4.+",
       "ch.qos.logback"           %  "logback-classic"                     % "1.1.+",
-      "org.scalikejdbc"          %% "scalikejdbc-play-plugin"             % "2.3.0",
-      "org.scalikejdbc"          %% "scalikejdbc-syntax-support-macro"    % "2.1.+",
+      "org.scalikejdbc"          %% "scalikejdbc"                         % "2.2.+",
+      "org.scalikejdbc"          %% "scalikejdbc-play-plugin"             % "2.3.+",
+      "org.scalikejdbc"          %% "scalikejdbc-syntax-support-macro"    % "2.2.+",
       "com.github.tototoshi"     %% "play-flyway"                         % "1.1.0",
       "net.sourceforge.htmlunit" %  "htmlunit"                            % "2.14"     % "test"
     ),
