@@ -11,10 +11,11 @@
   @if(previousTruncate) {
     <li class="disabled"><a href="#">@truncateLabel</a></li>
   }
-  @calls.window.map { case (page, call) =>
-    @if(page == result.pager.page) {
+  @calls.window.map {
+    case (page, _) if page == result.pager.page => {
       <li class="active"><a href="#">@{page} <span class="sr-only">(current)</span></a></li>
-    } else {
+    }
+    case (page, call) => {
       <li ><a href="@call">@{page}</a></li>
     }
   }

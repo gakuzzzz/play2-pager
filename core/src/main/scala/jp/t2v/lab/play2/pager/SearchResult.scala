@@ -26,6 +26,8 @@ case class SearchResult[A](pager: Pager[A], items: Seq[A], totalCount: Long) {
     Pager[A](minPage, pager.size, primary, optional: _*)
   }
 
+  def keyOrder(key: String): Option[OrderType] = pager.keyOrder(key)
+
   private[this] def move(page: Int): Pager[A] = Pager[A](page, pager.size, pager.primarySorter, pager.optionalSorters: _*)
 
 }

@@ -1,15 +1,22 @@
 @(result: SearchResult[Account])
 
+@dir(key: String) = @{
+   result.keyOrder(key).map {
+      case OrderType.Ascending => "▲"
+      case OrderType.Descending => "▼"
+   }
+}
+
 @main("Welcome to Play2 Pager") {
 
     <table class="table">
       <thead>
         <tr>
-          <th><a href="@routes.Application.index(result.keyPager("id"))">id</a> @{if(result.pager.primarySorter.key == "id") result.pager.primarySorter.dir.value}</th>
-          <th><a href="@routes.Application.index(result.keyPager("name"))">name</a> @{if(result.pager.primarySorter.key == "name") result.pager.primarySorter.dir.value}</th>
-          <th><a href="@routes.Application.index(result.keyPager("email"))">email</a> @{if(result.pager.primarySorter.key == "email") result.pager.primarySorter.dir.value}</th>
-          <th><a href="@routes.Application.index(result.keyPager("birthday"))">birthday</a> @{if(result.pager.primarySorter.key == "birthday") result.pager.primarySorter.dir.value}</th>
-          <th><a href="@routes.Application.index(result.keyPager("createdAt"))">createdAt</a> @{if(result.pager.primarySorter.key == "createdAt") result.pager.primarySorter.dir.value}</th>
+          <th><a href="@routes.Application.index(result.keyPager("id"))">id</a> @dir("id")</th>
+          <th><a href="@routes.Application.index(result.keyPager("name"))">name</a> @dir("name")</th>
+          <th><a href="@routes.Application.index(result.keyPager("email"))">email</a> @dir("email")</th>
+          <th><a href="@routes.Application.index(result.keyPager("birthday"))">birthday</a> @dir("birthday")</th>
+          <th><a href="@routes.Application.index(result.keyPager("createdAt"))">createdAt</a> @dir("createdAt")</th>
         </tr>
       </thead>
       <tbody>

@@ -14,6 +14,8 @@ trait Sortable[A] {
     Sorter(k, d)
   }
 
+  def optionalDefaultSorters: Seq[Sorter[A]] = Nil
+
   def valueOf(key: String, dir: OrderType): Sorter[A] = {
     val (k, d) = acceptableKeys.find(_ == key).map((_, dir)) getOrElse default
     Sorter(k, d)
