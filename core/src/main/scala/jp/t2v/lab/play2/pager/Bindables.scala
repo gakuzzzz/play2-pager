@@ -10,12 +10,13 @@ object Bindables {
       val sorters = for {
         keys <- params.get("key")
         dirs <- params.get("dir")
-      } yield keys zip dirs.flatMap(OrderType.valueOf) map {
+        ords =  dirs.flatMap(OrderType.valueOf)
+      } yield (keys zip ords) map {
         case (k, d) => ev.valueOf(k, d)
       }
       val (primary, optional) = sorters match {
         case Some(h +: t) => (h, t)
-        case _            => (ev.defaultSorter, Nil)
+        case _            => (ev.defaultSorter, ev.optionalDefaultSorters)
       }
       Some(Right(Pager[A](
         page = bindableInt.bind("page", params).flatMap(_.right.toOption).getOrElse(1) max 1,

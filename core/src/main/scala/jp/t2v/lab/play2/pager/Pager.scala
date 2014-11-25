@@ -10,4 +10,6 @@ case class Pager[A](page: Int, size: Int, primarySorter: Sorter[A], optionalSort
   lazy val limit: Int = size
   lazy val offset: Int = size * (page - 1)
 
+  def keyOrder(Key: String): Option[OrderType] = allSorters.collectFirst { case Sorter(Key, o) => o }
+
 }
