@@ -13,3 +13,10 @@ case class Pager[A](page: Int, size: Int, primarySorter: Sorter[A], optionalSort
   def keyOrder(Key: String): Option[OrderType] = allSorters.collectFirst { case Sorter(Key, o) => o }
 
 }
+object Pager {
+
+  def default[A](implicit sortable: Sortable[A]): Pager[A] = {
+    Pager(1, sortable.defaultPageSize, sortable.defaultSorter, sortable.optionalDefaultSorters:_*)
+  }
+
+}
