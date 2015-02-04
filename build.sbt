@@ -100,6 +100,7 @@ lazy val sample = (project in file("sample")).
       "com.h2database"           %  "h2"                                  % "1.4.+",
       "ch.qos.logback"           %  "logback-classic"                     % "1.1.+",
       "org.scalikejdbc"          %% "scalikejdbc"                         % "2.2.+",
+      "org.scalikejdbc"          %% "scalikejdbc-config"                  % "2.2.+",
       "org.scalikejdbc"          %% "scalikejdbc-play-plugin"             % "2.3.+",
       "org.scalikejdbc"          %% "scalikejdbc-syntax-support-macro"    % "2.2.+",
       "com.github.tototoshi"     %% "play-flyway"                         % "1.1.0",
