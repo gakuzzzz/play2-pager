@@ -9,10 +9,10 @@ Pager support for Play2 application.
 
 ## Setup
 
-    resolvers += "Sonatype OSS Snapshots" at "https://oss.sonatype.org/content/repositories/snapshots"
-
-    libraryDependencies += "jp.t2v" %% "play2-pager"             % "0.1.0-SNAPSHOT"
-    libraryDependencies += "jp.t2v" %% "play2-pager-scalikejdbc" % "0.1.0-SNAPSHOT" // optional. it is useful when you use scalikejdbc.
+```scala
+libraryDependencies += "jp.t2v" %% "play2-pager"             % "0.1.0"
+libraryDependencies += "jp.t2v" %% "play2-pager-scalikejdbc" % "0.1.0" // optional. it is useful when you use scalikejdbc.
+```
 
 ## How to use
 
