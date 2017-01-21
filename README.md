@@ -24,6 +24,14 @@ libraryDependencies += "jp.t2v" %% "play2-pager-scalikejdbc" % "0.1.0" // option
     play.PlayImport.PlayKeys.routesImport += "jp.t2v.lab.play2.pager.Bindables._"
     ```
 
+    Please set the following configurations to build.sbt if your play's version is 2.5.x.
+
+    ```scala
+    TwirlKeys.templateImports += "jp.t2v.lab.play2.pager._"
+    play.sbt.routes.RoutesKeys.routesImport += "jp.t2v.lab.play2.pager.Pager"
+    play.sbt.routes.RoutesKeys.routesImport += "jp.t2v.lab.play2.pager.Bindables._"
+    ```
+
 1. define implicit `Sortable` value of your entities.
 
     * `default` is default sorting key and direction.
