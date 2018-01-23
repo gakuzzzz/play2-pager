@@ -1,6 +1,8 @@
+scalaVersion := "2.11.12"
+
 val _version = "0.1.0"
 
-val _crossScalaVersions = Seq("2.11.2", "2.10.4")
+val _crossScalaVersions = Seq("2.12.4", "2.11.12")
 
 val _org = "jp.t2v"
 
@@ -40,6 +42,7 @@ lazy val _pomExtra = {
     </developers>
 }
 
+lazy val _playVersion = play.core.PlayVersion.current
 
 lazy val root = (project in file(".")).
   aggregate(core, scalikejdbc, sample).
@@ -49,64 +52,65 @@ lazy val root = (project in file(".")).
     publish             := { },
     publishArtifact     := false,
     packagedArtifacts   := Map.empty,
-    publishTo           <<=(version)(_publishTo),
+    publishTo           := _publishTo(_version),
     pomExtra            := _pomExtra
   )
+
+lazy val commonSettings = Seq(
+  organization := _org,
+  name := "play2-pager",
+  version := _version,
+  scalaVersion := "2.11.12",
+  crossScalaVersions := _crossScalaVersions,
+  publishMavenStyle       := _publishMavenStyle,
+  publishArtifact in Test := _publishArtifactInTest,
+  pomIncludeRepository    := _pomIncludeRepository,
+  publishTo               := _publishTo(_version),
+  pomExtra                := _pomExtra
+)
 
 lazy val core = (project in file("core")).
   enablePlugins(SbtTwirl).
   settings(
-    organization := _org,
+    commonSettings,
     name := "play2-pager",
-    version := _version,
-    crossScalaVersions := _crossScalaVersions,
-    resolvers += "Typesafe repository" at "http://repo.typesafe.com/typesafe/releases/",
     libraryDependencies ++= Seq(
-      "com.typesafe.play"  %%   "play"   %  "2.3.4"  %   "provided"
+      "com.typesafe.play" %% "play" % _playVersion  % "provided"
     ),
     TwirlKeys.templateImports ++= Seq(
       "jp.t2v.lab.play2.pager._"
-    ),
-    publishMavenStyle       := _publishMavenStyle,
-    publishArtifact in Test := _publishArtifactInTest,
-    pomIncludeRepository    := _pomIncludeRepository,
-    publishTo               <<=(version)(_publishTo),
-    pomExtra                := _pomExtra
+    )
   )
 
 lazy val scalikejdbc = (project in file("scalikejdbc")).
   dependsOn(core).
   settings(
-    organization := _org,
+    commonSettings,
     name := "play2-pager-scalikejdbc",
-    version := _version,
-    crossScalaVersions := _crossScalaVersions,
     libraryDependencies ++= Seq(
-      "org.scalikejdbc"  %% "scalikejdbc"  % "2.2.+"  % "provided"
-    ),
-    publishMavenStyle       := _publishMavenStyle,
-    publishArtifact in Test := _publishArtifactInTest,
-    pomIncludeRepository    := _pomIncludeRepository,
-    publishTo               <<=(version)(_publishTo),
-    pomExtra                := _pomExtra
+      "org.scalikejdbc"  %% "scalikejdbc"  % "3.1.+"  % "provided"
+    )
   )
 
 lazy val sample = (project in file("sample")).
   dependsOn(core, scalikejdbc).
   enablePlugins(PlayScala).
   settings(
-    crossScalaVersions := _crossScalaVersions,
+    commonSettings,
+    name := "play2-pager-sample",
     libraryDependencies ++= Seq(
       "com.h2database"           %  "h2"                                  % "1.4.+",
-      "ch.qos.logback"           %  "logback-classic"                     % "1.1.+",
-      "org.scalikejdbc"          %% "scalikejdbc"                         % "2.2.+",
-      "org.scalikejdbc"          %% "scalikejdbc-config"                  % "2.2.+",
-      "org.scalikejdbc"          %% "scalikejdbc-play-plugin"             % "2.3.+",
-      "org.scalikejdbc"          %% "scalikejdbc-syntax-support-macro"    % "2.2.+",
-      "com.github.tototoshi"     %% "play-flyway"                         % "1.1.0",
-      "net.sourceforge.htmlunit" %  "htmlunit"                            % "2.14"     % "test"
+      "ch.qos.logback"           %  "logback-classic"                     % "1.2.+",
+      "org.scalikejdbc"          %% "scalikejdbc"                         % "3.1.+",
+      "org.scalikejdbc"          %% "scalikejdbc-config"                  % "3.1.+",
+      "org.scalikejdbc"          %% "scalikejdbc-play-initializer"        % "2.6.0-scalikejdbc-3.1",
+      "org.scalikejdbc"          %% "scalikejdbc-syntax-support-macro"    % "3.1.+",
+      guice,
+      "org.flywaydb"             %% "flyway-play"                         % "4.0.0",
+      "net.sourceforge.htmlunit" %  "htmlunit"                            % "2.14"     % "test",
+      "org.scalatestplus.play" %% "scalatestplus-play" % "3.1.2" % "test"
     ),
-    play.PlayImport.PlayKeys.routesImport ++= Seq(
+    routesImport ++= Seq(
       "jp.t2v.lab.play2.pager.Pager",
       "jp.t2v.lab.play2.pager.Bindables._",
       "models.account._"
@@ -114,10 +118,5 @@ lazy val sample = (project in file("sample")).
     TwirlKeys.templateImports ++= Seq(
       "jp.t2v.lab.play2.pager._",
       "models.account._"
-    ),
-    publish           := { },
-    publishArtifact   := false,
-    packagedArtifacts := Map.empty,
-    publishTo         <<=(version)(_publishTo),
-    pomExtra          := _pomExtra
+    )
   )
