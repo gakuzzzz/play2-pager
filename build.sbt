@@ -1,8 +1,8 @@
-scalaVersion := "2.11.12"
+scalaVersion := "2.12.7"
 
-val _version = "0.1.0"
+val _version = "0.2.0"
 
-val _crossScalaVersions = Seq("2.12.4", "2.11.12")
+val _crossScalaVersions = Seq("2.12.7", "2.11.12")
 
 val _org = "jp.t2v"
 
@@ -60,7 +60,7 @@ lazy val commonSettings = Seq(
   organization := _org,
   name := "play2-pager",
   version := _version,
-  scalaVersion := "2.11.12",
+  scalaVersion := "2.12.7",
   crossScalaVersions := _crossScalaVersions,
   publishMavenStyle       := _publishMavenStyle,
   publishArtifact in Test := _publishArtifactInTest,
@@ -118,5 +118,10 @@ lazy val sample = (project in file("sample")).
     TwirlKeys.templateImports ++= Seq(
       "jp.t2v.lab.play2.pager._",
       "models.account._"
-    )
+    ),
+    publish             := { },
+    publishArtifact     := false,
+    packagedArtifacts   := Map.empty,
+    publishTo           := _publishTo(_version),
+    pomExtra            := _pomExtra
   )
