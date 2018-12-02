@@ -1,39 +1,41 @@
-import org.specs2.mutable._
-import org.specs2.runner._
-import org.junit.runner._
+package controllers
 
-import play.api.test._
+import org.scalatestplus.play._
+import org.scalatestplus.play.guice._
 import play.api.test.Helpers._
+import play.api.test._
 
 /**
  * Add your spec here.
  * You can mock out a whole application including requests, plugins etc.
  * For more information, consult the wiki.
  */
-@RunWith(classOf[JUnitRunner])
-class ApplicationSpec extends Specification {
+
+class ApplicationSpec extends PlaySpec with GuiceOneAppPerTest {
 
   "Application" should {
 
-    "send 404 on a bad request" in new WithApplication{
-      route(FakeRequest(GET, "/boum")) must beNone
+    "send 404 on a request to undefined url" in {
+      val boum = route(app, FakeRequest(GET, "/boum")).get
+
+      status(boum) must equal(NOT_FOUND)
     }
 
-    "render the index page" in new WithApplication{
-      val home = route(FakeRequest(GET, "/")).get
+    "render the index page" in {
+      val home = route(app, FakeRequest(GET, "/")).get
 
-      status(home) must equalTo(OK)
-      contentType(home) must beSome.which(_ == "text/html")
-      contentAsString(home) must contain ("lobortis.tellus@temporarcu.com")
-      contentAsString(home) must contain ("pellentesque.tellus@atvelit.com")
+      status(home) must equal(OK)
+      contentType(home) mustBe Some("text/html")
+      contentAsString(home) must include ("lobortis.tellus@temporarcu.com")
+      contentAsString(home) must include ("pellentesque.tellus@atvelit.com")
     }
 
-    "render the index page with page parameter" in new WithApplication{
-      val home = route(FakeRequest(GET, "/?page=7&size=30&key=email&dir=asc")).get
+    "render the index page with page parameter" in {
+      val home = route(app, FakeRequest(GET, "/?page=7&size=30&key=email&dir=asc")).get
 
-      status(home) must equalTo(OK)
-      contentType(home) must beSome.which(_ == "text/html")
-      contentAsString(home) must contain ("dictum.ultricies.ligula@consequatenim.org")
+      status(home) must equal(OK)
+      contentType(home) mustBe Some("text/html")
+      contentAsString(home) must include ("dictum.ultricies.ligula@consequatenim.org")
     }
 
   }

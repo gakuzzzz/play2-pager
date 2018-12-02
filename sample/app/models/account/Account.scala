@@ -8,6 +8,7 @@ import scalikejdbc.WrappedResultSet
 case class Account(id: Int, name: Name, email: EMail, birthday: LocalDate, createdAt: DateTime)
 
 object Account extends SQLSyntaxSupport[Account] {
+  override lazy val columns = autoColumns[Account]()
 
   def apply(s: SyntaxProvider[Account])(rs: WrappedResultSet): Account = autoConstruct(rs, s)
 
