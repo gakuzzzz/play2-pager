@@ -1,6 +1,6 @@
 scalaVersion := "2.13.10"
 
-val _version = "0.3.0-SNAPSHOT"
+val _version = "0.4.0-SNAPSHOT"
 
 val _crossScalaVersions = Seq("2.13.10", "2.12.17")
 
@@ -87,7 +87,7 @@ lazy val scalikejdbc = (project in file("scalikejdbc")).
     commonSettings,
     name := "play2-pager-scalikejdbc",
     libraryDependencies ++= Seq(
-      "org.scalikejdbc"  %% "scalikejdbc"  % "3.4.+"  % Provided
+      "org.scalikejdbc"  %% "scalikejdbc"  % "3.5.+"  % Provided
     )
   )
 
@@ -98,18 +98,16 @@ lazy val sample = (project in file("sample")).
     commonSettings,
     name := "play2-pager-sample",
     libraryDependencies ++= Seq(
-      "com.h2database"           %  "h2"                                  % "2.1.+",
-      "org.scalikejdbc"          %% "scalikejdbc"                         % "3.4.+",
-      "org.scalikejdbc"          %% "scalikejdbc-config"                  % "3.4.+",
-      "org.scalikejdbc"          %% "scalikejdbc-play-initializer"        % "2.7.1-scalikejdbc-3.4",
-      "org.scalikejdbc"          %% "scalikejdbc-syntax-support-macro"    % "3.4.+",
+      "com.h2database"               %  "h2"                                  % "2.1.+",
+      "org.scalikejdbc"              %% "scalikejdbc"                         % "3.5.+",
+      "org.scalikejdbc"              %% "scalikejdbc-config"                  % "3.5.+",
+      "org.scalikejdbc"              %% "scalikejdbc-play-initializer"        % "2.8.0-scalikejdbc-3.5",
+      "org.scalikejdbc"              %% "scalikejdbc-syntax-support-macro"    % "3.5.+",
       guice,
-      "org.flywaydb"             %% "flyway-play"                         % "7.22.0",
+      "org.flywaydb"                 %% "flyway-play"                         % "7.31.0",
+      "com.fasterxml.jackson.module" %% "jackson-module-scala"                % "2.14.2",
+      "org.scalatestplus.play"       %% "scalatestplus-play"                  % "5.1.0"     % Test
     ),
-    libraryDependencies ++= Seq(
-      "com.fasterxml.jackson.module" %% "jackson-module-scala"            % "2.14.0",
-      "org.scalatestplus.play"       %% "scalatestplus-play"              % "4.0.0"
-    ).map(_ % Test),
     routesImport ++= Seq(
       "jp.t2v.lab.play2.pager.Pager",
       "jp.t2v.lab.play2.pager.Bindables._",

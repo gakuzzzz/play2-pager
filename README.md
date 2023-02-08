@@ -9,9 +9,16 @@ Pager support for Play2 application.
 ## Target
 
 Scala 2.11.x & 2.12.x & 2.13.x  
-Play 2.5.x & 2.6.x & 2.7.x
+Play 2.5.x & 2.6.x & 2.7.x & 2.8.x
 
 ## Setup
+
+for Play 2.8.x
+
+```scala
+libraryDependencies += "jp.t2v" %% "play2-pager"             % "0.4.0"
+libraryDependencies += "jp.t2v" %% "play2-pager-scalikejdbc" % "0.4.0" // optional. it is useful when you use scalikejdbc.
+```
 
 for Play 2.7.x
 
