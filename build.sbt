@@ -104,7 +104,7 @@ lazy val sample = (project in file("sample")).
       "org.scalikejdbc"          %% "scalikejdbc-play-initializer"        % "2.7.1-scalikejdbc-3.4",
       "org.scalikejdbc"          %% "scalikejdbc-syntax-support-macro"    % "3.4.+",
       guice,
-      "org.flywaydb"             %% "flyway-play"                         % "5.4.0",
+      "org.flywaydb"             %% "flyway-play"                         % "7.22.0",
     ),
     libraryDependencies ++= Seq(
       "com.fasterxml.jackson.module" %% "jackson-module-scala"            % "2.14.0",
