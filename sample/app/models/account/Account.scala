@@ -1,11 +1,11 @@
 package models.account
 
 import scalikejdbc._
-import org.joda.time.{DateTime, LocalDate}
+import java.time.{LocalDateTime, LocalDate}
 import jp.t2v.lab.play2.pager.{OrderType, Sortable}
 import scalikejdbc.WrappedResultSet
 
-case class Account(id: Int, name: Name, email: EMail, birthday: LocalDate, createdAt: DateTime)
+case class Account(id: Int, name: Name, email: EMail, birthday: LocalDate, createdAt: LocalDateTime)
 
 object Account extends SQLSyntaxSupport[Account] {
   override lazy val columns = autoColumns[Account]()
