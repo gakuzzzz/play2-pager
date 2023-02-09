@@ -25,8 +25,8 @@
               <th>@{account.id}</th>
               <td>@{account.name}</td>
               <td>@{account.email}</td>
-              <td>@{account.birthday.toString("yyyy/MM/dd")}</td>
-              <td>@{account.createdAt.toString("yyyy-MM-dd HH:mm:ss")}</td>
+              <td>@{account.birthday.format(DateTimeFormatter.ofPattern("yyyy/MM/dd"))}</td>
+              <td>@{account.createdAt.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))}</td>
           </tr>
         }
       </tbody>

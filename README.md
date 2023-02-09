@@ -8,10 +8,26 @@ Pager support for Play2 application.
 
 ## Target
 
-Scala 2.11.x & 2.12.x
-Play 2.5.x & 2.6.x 
+Scala 2.11.x & 2.12.x & 2.13.x  
+Play 2.5.x & 2.6.x & 2.7.x & 2.8.x
 
 ## Setup
+
+for Play 2.8.x
+
+```scala
+libraryDependencies += "jp.t2v" %% "play2-pager"             % "0.4.0"
+libraryDependencies += "jp.t2v" %% "play2-pager-scalikejdbc" % "0.4.0" // optional. it is useful when you use scalikejdbc.
+```
+
+for Play 2.7.x
+
+```scala
+libraryDependencies += "jp.t2v" %% "play2-pager"             % "0.3.0"
+libraryDependencies += "jp.t2v" %% "play2-pager-scalikejdbc" % "0.3.0" // optional. it is useful when you use scalikejdbc.
+```
+
+for Play 2.5.x, 2.6.x
 
 ```scala
 libraryDependencies += "jp.t2v" %% "play2-pager"             % "0.2.0"
@@ -46,10 +62,10 @@ libraryDependencies += "jp.t2v" %% "play2-pager-scalikejdbc" % "0.2.0" // option
     package models.account
     
     import scalikejdbc._
-    import org.joda.time.{DateTime, LocalDate}
+    import java.time.{LocalDateTime, LocalDate}
     import jp.t2v.lab.play2.pager.{OrderType, Sortable}
     
-    case class Account(id: Int, name: Name, email: EMail, birthday: LocalDate, createdAt: DateTime)
+    case class Account(id: Int, name: Name, email: EMail, birthday: LocalDate, createdAt: LocalDateTime)
     
     object Account extends SQLSyntaxSupport[Account] {
     
@@ -111,7 +127,7 @@ libraryDependencies += "jp.t2v" %% "play2-pager-scalikejdbc" % "0.2.0" // option
 
 1. git clone
 1. cd play2-pager
-1. sbt "project sample" run
+1. sbt sample/run
 1. browse `http://localhost:9000/`
 1. Click `Apply this script now!`
 
